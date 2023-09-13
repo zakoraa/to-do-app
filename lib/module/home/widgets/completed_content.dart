@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/module/home/widgets/check_box_widget.dart';
+import 'package:todoapp/shared/themes/color.dart';
 
 class CompletedContent extends StatelessWidget {
   const CompletedContent({super.key});
@@ -8,17 +10,16 @@ class CompletedContent extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
       width: MediaQuery.of(context).size.width,
-      child: Row(
+      child: const Row(
         children: [
-          Checkbox(
-            value: false,
-            activeColor: Colors.lightBlue,
-            onChanged: (value) {},
+          SizedBox(
+            width: 15.0,
           ),
-          const SizedBox(
+          CheckBoxActive(),
+          SizedBox(
             width: 20.0,
           ),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -28,7 +29,10 @@ class CompletedContent extends StatelessWidget {
               SizedBox(
                 height: 5.0,
               ),
-              Text("💻 Programming"),
+              Text(
+                "💻 Programming",
+                style: TextStyle(color: CustomColor.secondaryTextColor),
+              ),
             ],
           )
         ],

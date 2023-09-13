@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/module/home/widgets/check_box_inactive.dart';
 import 'package:todoapp/shared/themes/color.dart';
 
 class IncompleteContent extends StatelessWidget {
@@ -9,16 +10,16 @@ class IncompleteContent extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
       width: MediaQuery.of(context).size.width,
-      child: Row(
+      child: const Row(
         children: [
-          Checkbox(
-            value: false,
-            onChanged: (value) {},
+          SizedBox(
+            width: 15.0,
           ),
-          const SizedBox(
+          CheckBoxInactive(),
+          SizedBox(
             width: 20.0,
           ),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -30,7 +31,7 @@ class IncompleteContent extends StatelessWidget {
               ),
               Text(
                 "📒 Tugas",
-                style: TextStyle(color: CustomColor.secondaryColor),
+                style: TextStyle(color: CustomColor.secondaryTextColor),
               )
             ],
           ),

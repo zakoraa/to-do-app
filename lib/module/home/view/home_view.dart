@@ -3,6 +3,8 @@ import 'package:todoapp/module/home/widgets/app_bar_home.dart';
 import 'package:todoapp/module/home/widgets/completed.dart';
 import 'package:todoapp/module/home/widgets/incomplete.dart';
 
+import '../widgets/floating_button_widget.dart';
+
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
@@ -30,7 +32,8 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
               ),
-              HomeAppBar()
+              HomeAppBar(),
+              FloatingButtonWidget()
             ],
           ),
         ),
