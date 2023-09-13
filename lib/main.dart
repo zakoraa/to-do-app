@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/module/home/view/home_view.dart';
+import 'package:todoapp/shared/themes/theme.dart';
 
 void main() => runApp(const MyApp());
 
@@ -7,11 +9,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      theme: ThemeData.dark(),
-      home: Scaffold(
-        appBar: AppBar(title: Text("To Do App")),
-      ),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: CustomTheme.darkTheme,
+        home: const HomeView());
   }
 }
