@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/module/home/widgets/app_bar_home.dart';
+import 'package:todoapp/module/home/widgets/completed.dart';
 import 'package:todoapp/module/home/widgets/incomplete.dart';
 
 class HomeView extends StatelessWidget {
@@ -21,7 +22,11 @@ class HomeView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: HomeAppBar.heightAppBar + 20),
-                    Incomplete()
+                    Incomplete(),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Completed()
                   ],
                 ),
               ),

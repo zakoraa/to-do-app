@@ -6,13 +6,13 @@ class IncompleteContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: const EdgeInsets.only(bottom: 10),
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
           Checkbox(
-            value:
-                const bool.fromEnvironment("incomplete", defaultValue: false),
+            value: false,
             onChanged: (value) {},
           ),
           const SizedBox(
