@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/module/home/widgets/check_box_widget.dart';
+import 'package:todoapp/module/home/widgets/check_box_active.dart';
 import 'package:todoapp/shared/themes/color.dart';
 
 class CompletedContent extends StatelessWidget {
@@ -27,14 +27,14 @@ class CompletedContent extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
               SizedBox(
-                height: 5.0,
+                height: 10.0,
               ),
               Text(
                 "💻 Programming",
                 style: TextStyle(color: CustomColor.secondaryTextColor),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

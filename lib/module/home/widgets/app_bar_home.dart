@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/shared/themes/color.dart';
+import 'package:intl/intl.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -8,6 +9,8 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = DateTime.now();
+    String formattedDate = DateFormat.yMMMd('en_US').format(dateTime);
     return Positioned(
       top: 0,
       left: 0,
@@ -20,9 +23,10 @@ class HomeAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "March 9,2020",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              Text(
+                formattedDate,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               const SizedBox(
                 height: 10.0,

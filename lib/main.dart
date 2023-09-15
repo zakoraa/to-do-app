@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/module/home/businessLogic/bloc/home_bloc.dart';
 import 'package:todoapp/module/home/view/home_view.dart';
 import 'package:todoapp/shared/themes/theme.dart';
 
@@ -12,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: CustomTheme.darkTheme,
-        home: const HomeView());
+        home: BlocProvider(
+            create: (context) => HomeBloc(), child: const HomeView()));
   }
 }

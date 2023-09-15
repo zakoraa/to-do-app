@@ -1,8 +1,7 @@
 enum ToDoType { tugas, programming }
 
 class ToDo {
-  int id;
-  String title, description, createdTime;
+  String id,title, description, createdTime;
   ToDoType? type;
 
   ToDo(

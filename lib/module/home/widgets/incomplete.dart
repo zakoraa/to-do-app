@@ -14,7 +14,7 @@ class Incomplete extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
         ),
         SizedBox(
-          height: 10.0,
+          height: 20.0,
         ),
         IncompleteContent()
       ],

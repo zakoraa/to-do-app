@@ -1,4 +1,4 @@
-part of '../bloc/home_bloc.dart';
+part of 'home_bloc.dart';
 
 @immutable
 abstract class HomeEvent extends Equatable {
@@ -6,8 +6,7 @@ abstract class HomeEvent extends Equatable {
 }
 
 class OnAddListEventCalled extends HomeEvent {
-  final int id;
-  final String title, description, createdTime;
+  final String id, title, description, createdTime;
   final ToDoType? type;
 
   const OnAddListEventCalled(
@@ -16,7 +15,14 @@ class OnAddListEventCalled extends HomeEvent {
       required this.description,
       required this.createdTime,
       this.type});
-  
+
   @override
-  List<Object?> get props => [title, description, createdTime, type];
+  List<Object?> get props => [id, title, description, createdTime, type];
 }
+
+class OnCompletedEventCalled extends HomeEvent {
+  const OnCompletedEventCalled();
+  @override
+  List<Object?> get props => [];
+}
+
