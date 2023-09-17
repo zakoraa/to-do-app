@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/module/home/widgets/bottom_sheet_widget.dart';
 import '../../../shared/themes/color.dart';
 import '../businessLogic/cubit/check_box.dart';
 import 'check_box_active.dart';
@@ -70,10 +71,22 @@ class Incomplete extends StatelessWidget {
                   ),
                 ],
               ),
-              const Expanded(
+              Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [Icon(Icons.edit)],
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          showBottomSheet(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            context: context,
+                            builder: (context) =>
+                                const BottomSheetWidget(isAddToDoList: false),
+                          );
+                        },
+                        child: const Icon(Icons.edit))
+                  ],
                 ),
               ),
             ],

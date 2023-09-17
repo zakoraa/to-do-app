@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import '../../../shared/widgets/custom_text_field.dart';
 
 class BottomSheetWidget extends StatelessWidget {
-  const BottomSheetWidget({super.key});
+  const BottomSheetWidget({super.key, this.isAddToDoList = true});
+
+  final bool isAddToDoList;
 
   @override
   Widget build(BuildContext context) {
-    List<String> listType = ["Tugas", "Programming", "Others"];
+    List<String> listType = ["📒 Tugas", "💻 Programming", "Others"];
     String dropDownValue = listType.first;
 
     return SizedBox(
-      height: 500,
+      height: isAddToDoList ? 500 : 400,
       child: ListView(physics: const BouncingScrollPhysics(), children: [
         Container(
-          height: 500,
+          height: isAddToDoList ? 500 : 400,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -43,15 +45,16 @@ class BottomSheetWidget extends StatelessWidget {
                       )),
                   SizedBox(
                       width: MediaQuery.of(context).size.width - 140,
-                      child: const Center(
+                      child: Center(
                           child: Text(
-                        "Add Your To-Do List ",
+                        isAddToDoList
+                            ? "Add Your To-Do List "
+                            : "Edit Your To-Do List ",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ))),
-                  Container(
-                    color: Colors.yellow,
+                  const SizedBox(
                     width: 50.0,
                   ),
                 ],
@@ -67,39 +70,47 @@ class BottomSheetWidget extends StatelessWidget {
               const SizedBox(
                 height: 30.0,
               ),
+              isAddToDoList
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Select Type : ",
+                            style: TextStyle(fontSize: 14),
+                          ),
+                          DropdownButton(
+                            style: const TextStyle(fontSize: 14),
+                            borderRadius: BorderRadius.circular(10),
+                            value: dropDownValue,
+                            items: listType
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                  value: value, child: Text(value));
+                            }).toList(),
+                            onChanged: (value) {},
+                          ),
+                        ],
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              isAddToDoList
+                  ? const SizedBox(
+                      height: 20.0,
+                    )
+                  : const SizedBox.shrink(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Select Type : ",
-                      style: TextStyle(fontSize: 14),
+                child: OutlinedButton(
+                    style: const ButtonStyle(
+                      splashFactory: NoSplash.splashFactory,
                     ),
-                    DropdownButton(
-                      borderRadius: BorderRadius.circular(10),
-                      value: dropDownValue,
-                      items: listType
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                            value: value, child: Text(value));
-                      }).toList(),
-                      onChanged: (value) {},
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              OutlinedButton(
-                  style: const ButtonStyle(
-                    splashFactory: NoSplash.splashFactory,
-                  ),
-                  onPressed: () {},
-                  child: const Center(
-                    child: Text("Submit"),
-                  ))
+                    onPressed: () {},
+                    child: const Center(
+                      child: Text("Submit"),
+                    )),
+              )
             ],
           ),
         ),
