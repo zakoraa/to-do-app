@@ -12,11 +12,19 @@ class BottomSheetWidget extends StatelessWidget {
     List<String> listType = ["📒 Tugas", "💻 Programming", "Others"];
     String dropDownValue = listType.first;
 
+    void _showDatePicker() {
+      showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now(),
+          lastDate: DateTime(2025));
+    }
+
     return SizedBox(
-      height: isAddToDoList ? 500 : 400,
+      height: 400,
       child: ListView(physics: const BouncingScrollPhysics(), children: [
         Container(
-          height: isAddToDoList ? 500 : 400,
+          height: 400,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -66,40 +74,56 @@ class BottomSheetWidget extends StatelessWidget {
               const SizedBox(
                 height: 30.0,
               ),
-              const CustomTextField(labelText: "List Description"),
-              const SizedBox(
-                height: 30.0,
-              ),
-              isAddToDoList
-                  ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Select Type : ",
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          DropdownButton(
-                            style: const TextStyle(fontSize: 14),
-                            borderRadius: BorderRadius.circular(10),
-                            value: dropDownValue,
-                            items: listType
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                  value: value, child: Text(value));
-                            }).toList(),
-                            onChanged: (value) {},
-                          ),
-                        ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    _showDatePicker();
+                  },
+                  child: const Row(
+                    children: [
+                      Text(
+                        "Choose Deadline",
+                        style: TextStyle(fontSize: 14),
                       ),
-                    )
-                  : const SizedBox.shrink(),
-              isAddToDoList
-                  ? const SizedBox(
-                      height: 20.0,
-                    )
-                  : const SizedBox.shrink(),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Icon(Icons.keyboard_arrow_down)
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Select Type : ",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    DropdownButton(
+                      style: const TextStyle(fontSize: 14),
+                      borderRadius: BorderRadius.circular(10),
+                      value: dropDownValue,
+                      icon: const Icon(Icons.keyboard_arrow_down),
+                      items: listType
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                            value: value, child: Text(value));
+                      }).toList(),
+                      onChanged: (value) {},
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: OutlinedButton(
