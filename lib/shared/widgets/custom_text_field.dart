@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/shared/themes/color.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({super.key, required this.labelText});
@@ -14,6 +15,9 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(horizontal: 10),
           labelText: labelText,
+          labelStyle:const TextStyle(
+            color: CustomColor.secondaryTextColor
+          ),
           enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(
             color: Colors.white,

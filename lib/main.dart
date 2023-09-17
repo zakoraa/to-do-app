@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/module/home/businessLogic/bloc/home_bloc.dart';
+import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
 import 'package:todoapp/module/home/view/home_view.dart';
 import 'package:todoapp/shared/themes/theme.dart';
 
@@ -11,10 +12,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: CustomTheme.darkTheme,
-        home: BlocProvider(
-            create: (context) => HomeBloc(), child: const HomeView()));
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => HomeBloc()),
+          BlocProvider(
+            create: (context) => ThemeCubit(),
+          )
+        ],
+        child: BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, state) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme:
+                state.isLight ? CustomTheme.lightTheme : CustomTheme.darkTheme,
+            home: const HomeView(),
+          ),
+        ));
   }
 }
