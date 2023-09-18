@@ -7,8 +7,11 @@ class CustomTheme {
       textTheme: const TextTheme(bodyMedium: TextStyle(fontSize: 12)));
 
   static ThemeData get lightTheme => ThemeData.light().copyWith(
-          textTheme: const TextTheme(
-              bodyMedium: TextStyle(
+      iconTheme: const IconThemeData(
+        color: Colors.white,
+      ),
+      textTheme: const TextTheme(
+          bodyMedium: TextStyle(
         fontSize: 12,
         color: Colors.black,
       )));
