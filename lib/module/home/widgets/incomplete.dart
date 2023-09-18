@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
 import 'package:todoapp/module/home/widgets/bottom_sheet_widget.dart';
 import '../../../shared/themes/color.dart';
 import '../businessLogic/cubit/check_box.dart';
@@ -85,7 +86,13 @@ class Incomplete extends StatelessWidget {
                                 const BottomSheetWidget(isAddToDoList: false),
                           );
                         },
-                        child: const Icon(Icons.edit))
+                        child: BlocBuilder<ThemeCubit, ThemeState>(
+                            builder: (context, state) => Icon(
+                                  Icons.edit,
+                                  color: state.isLight
+                                      ? CustomColor.secondaryTextColor
+                                      : Colors.white,
+                                )))
                   ],
                 ),
               ),
