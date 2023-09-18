@@ -43,20 +43,15 @@ class BottomSheetWidget extends StatelessWidget {
                 Row(
                   children: [
                     GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          width: 50,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromARGB(250, 14, 14, 14)),
-                          child: const Icon(
-                            Icons.keyboard_arrow_down_rounded,
-                            color: Colors.white,
-                            size: 40,
-                          ),
-                        )),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                    ),
                     SizedBox(
                         width: MediaQuery.of(context).size.width - 140,
                         child: Center(
