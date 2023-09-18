@@ -7,6 +7,9 @@ class CustomTheme {
       textTheme: const TextTheme(bodyMedium: TextStyle(fontSize: 12)));
 
   static ThemeData get lightTheme => ThemeData.light().copyWith(
+      datePickerTheme: const DatePickerThemeData(
+          backgroundColor: Colors.white,
+          headerBackgroundColor: CustomColor.secondaryTextColor),
       iconTheme: const IconThemeData(
         color: Colors.white,
       ),
