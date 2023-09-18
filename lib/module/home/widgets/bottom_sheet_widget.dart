@@ -127,6 +127,7 @@ class BottomSheetWidget extends StatelessWidget {
                         style: const TextStyle(fontSize: 14),
                         borderRadius: BorderRadius.circular(10),
                         value: dropDownValue,
+                        dropdownColor: const Color.fromARGB(255, 32, 32, 32),
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: listType
                             .map<DropdownMenuItem<String>>((String value) {
@@ -145,9 +146,8 @@ class BottomSheetWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: OutlinedButton(
                       style: const ButtonStyle(
-                        side: MaterialStatePropertyAll(BorderSide(
-                          color: CustomColor.secondaryTextColor
-                        )),
+                        side: MaterialStatePropertyAll(
+                            BorderSide(color: CustomColor.secondaryTextColor)),
                         splashFactory: NoSplash.splashFactory,
                       ),
                       onPressed: () {},
