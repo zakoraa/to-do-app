@@ -133,7 +133,7 @@ class BottomSheetWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           value: dropDownValue,
                           dropdownColor: const Color.fromARGB(255, 32, 32, 32),
-                          icon: const Icon(Icons.keyboard_arrow_down),
+                          icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white,),
                           items: listType
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
