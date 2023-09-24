@@ -44,7 +44,7 @@ class HomeAppBar extends StatelessWidget {
                           height: 10.0,
                         ),
                         const Text(
-                          "5 incomplete, 5 completed",
+                          "1 incomplete, 1 completed",
                           style: TextStyle(
                             color: CustomColor.secondaryTextColor,
                             fontWeight: FontWeight.bold,
