@@ -24,148 +24,140 @@ class BottomSheetWidget extends StatelessWidget {
           lastDate: DateTime(2025));
     }
 
-    return Column(children: [
-      GestureDetector(
-        onTap: () => Navigator.pop(context),
-        child: Container(
-          color: Colors.transparent,
-          height: MediaQuery.of(context).size.height - 400,
-          width: MediaQuery.of(context).size.width,
-        ),
-      ),
-      SizedBox(
-        height: 400,
-        child: ListView(physics: const BouncingScrollPhysics(), children: [
-          BlocBuilder<ThemeCubit, ThemeState>(
-            builder: (context, state) => Container(
-              height: 400,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20)),
-                color: Color.fromARGB(255, 20, 20, 20),
-              ),
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                      ),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width - 140,
-                          child: Center(
-                              child: Text(
-                            isAddToDoList
-                                ? "Add Your To-Do List "
-                                : "Edit Your To-Do List ",
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          ))),
-                      const SizedBox(
-                        width: 50.0,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 40.0,
-                  ),
-                  const CustomTextField(labelText: "List Title"),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: GestureDetector(
+    return SizedBox(
+      height: 400,
+      child: ListView(physics: const BouncingScrollPhysics(), children: [
+        BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, state) => Container(
+            height: 400,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              color: Color.fromARGB(255, 20, 20, 20),
+            ),
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    GestureDetector(
                       onTap: () {
-                        _showDatePicker();
+                        Navigator.pop(context);
                       },
-                      child: const Row(
-                        children: [
-                          Text(
-                            "Choose Deadline",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.white,
-                          )
-                        ],
+                      child: const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: Colors.white,
+                        size: 40,
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width - 140,
+                        child: Center(
+                            child: Text(
+                          isAddToDoList
+                              ? "Add Your To-Do List "
+                              : "Edit Your To-Do List ",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ))),
+                    const SizedBox(
+                      width: 50.0,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 40.0,
+                ),
+                const CustomTextField(labelText: "List Title"),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: GestureDetector(
+                    onTap: () {
+                      _showDatePicker();
+                    },
+                    child: const Row(
                       children: [
-                        const Text(
-                          "Select Type : ",
+                        Text(
+                          "Choose Deadline",
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.white,
                           ),
                         ),
-                        DropdownButton(
-                          style: const TextStyle(fontSize: 14),
-                          borderRadius: BorderRadius.circular(10),
-                          value: dropDownValue,
-                          dropdownColor: const Color.fromARGB(255, 32, 32, 32),
-                          icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white,),
-                          items: listType
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                                value: value, child: Text(value));
-                          }).toList(),
-                          onChanged: (value) {},
+                        SizedBox(
+                          width: 10.0,
                         ),
+                        Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white,
+                        )
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: OutlinedButton(
-                        style: const ButtonStyle(
-                          side: MaterialStatePropertyAll(BorderSide(
-                              color: CustomColor.secondaryTextColor)),
-                          splashFactory: NoSplash.splashFactory,
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Select Type : ",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
                         ),
-                        onPressed: () {},
-                        child: const Center(
-                          child: Text("Submit"),
-                        )),
-                  )
-                ],
-              ),
+                      ),
+                      DropdownButton(
+                        style: const TextStyle(fontSize: 14),
+                        borderRadius: BorderRadius.circular(10),
+                        value: dropDownValue,
+                        dropdownColor: const Color.fromARGB(255, 32, 32, 32),
+                        icon: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white,
+                        ),
+                        items: listType
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                              value: value, child: Text(value));
+                        }).toList(),
+                        onChanged: (value) {},
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: OutlinedButton(
+                      style: const ButtonStyle(
+                        side: MaterialStatePropertyAll(
+                            BorderSide(color: CustomColor.secondaryTextColor)),
+                        splashFactory: NoSplash.splashFactory,
+                      ),
+                      onPressed: () {},
+                      child: const Center(
+                        child: Text("Submit"),
+                      )),
+                )
+              ],
             ),
           ),
-        ]),
-      ),
-    ]);
+        ),
+      ]),
+    );
   }
 }
