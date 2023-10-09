@@ -1,31 +1,43 @@
 part of 'home_bloc.dart';
 
+enum ToDoStatus { initial, loading, success, error }
+
 @immutable
-abstract class HomeState extends Equatable {
-  const HomeState();
-}
+class ToDoState extends Equatable {
+  final List<ToDo> todoList;
+  final ToDoStatus status;
 
-class HomeInitial extends HomeState {
+  const ToDoState(
+      {this.todoList = const <ToDo>[], this.status = ToDoStatus.initial});
+
+  ToDoState copyWith({
+    ToDoStatus? status,
+    List<ToDo>? todoList,
+  }) {
+    return ToDoState(
+        todoList: todoList ?? this.todoList, status: status ?? this.status);
+  }
+
   @override
-  List<Object> get props => [];
-}
+  factory ToDoState.fromJson(Map<String, dynamic> json) {
+    try {
+      var listOfTodoList = (json['todo'] as List<dynamic>)
+          .map((e) => ToDo.fromJson(e as Map<String, dynamic>))
+          .toList();
 
-class AddToDoListState extends HomeState {
-  final List<ToDo> toDoResult;
+      return ToDoState(
+          todoList: listOfTodoList,
+          status: ToDoStatus.values.firstWhere(
+              (element) => element.name.toString() == json["status"]));
+    } catch (e) {
+      rethrow;
+    }
+  }
 
-  const AddToDoListState({required this.toDoResult});
+  Map<String, dynamic> toJson() {
+    return {"todo": todoList, "status": status.name};
+  }
+
   @override
-  List<Object> get props => [toDoResult];
-}
-
-class IncompletedToDoState extends HomeState {
-  @override
-  List<Object> get props => [];
-}
-
-class CompletedToDoState extends HomeState {
-  final List<ToDo> toDo;
-  const CompletedToDoState({required this.toDo});
-  @override
-  List<Object?> get props => [toDo];
+  List<Object?> get props => [todoList, status];
 }
