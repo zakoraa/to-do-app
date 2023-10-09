@@ -1,8 +1,7 @@
 enum ToDoType { tugas, programming, others }
 
 class ToDo {
-  final String title, createdTime;
-  final ToDoType? type;
+  final String title, createdTime, type;
   bool isDone;
 
   ToDo(
@@ -14,13 +13,13 @@ class ToDo {
   ToDo copyWith({
     String? title,
     String? createdTime,
-    ToDoType? type,
+    String? type,
     bool? isDone,
   }) {
     return ToDo(
         title: title ?? this.title,
         createdTime: createdTime ?? this.createdTime,
-        type: type ?? type,
+        type: type ?? this.type,
         isDone: isDone ?? this.isDone);
   }
 

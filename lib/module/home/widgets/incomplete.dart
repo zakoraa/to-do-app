@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/model/to_do_model.dart';
 import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
 import 'package:todoapp/module/home/widgets/bottom_sheet_widget.dart';
 import '../../../shared/themes/color.dart';
@@ -8,7 +9,9 @@ import 'check_box_active.dart';
 import 'check_box_inactive.dart';
 
 class Incomplete extends StatelessWidget {
-  const Incomplete({super.key});
+  const Incomplete({super.key, required this.toDo});
+
+  final ToDo toDo;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,9 @@ class Incomplete extends StatelessWidget {
                     return GestureDetector(
                         onTap: () {
                           context.read<CheckCubit>().checkedBox();
+                          if (state.isCheck) {
+                            toDo.isDone = true;
+                          }
                         },
                         child: state.isCheck
                             ? const CheckBoxActive()
@@ -48,27 +54,29 @@ class Incomplete extends StatelessWidget {
               const SizedBox(
                 width: 20.0,
               ),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Tugas Akhir PBO",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    toDo.title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Text(
-                    "Deadline : Sep 15, 2023",
-                    style: TextStyle(
+                    "Deadline : ${toDo.createdTime}",
+                    style: const TextStyle(
                         fontSize: 10, color: CustomColor.secondaryTextColor),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Text(
-                    "📒 Tugas",
-                    style: TextStyle(color: CustomColor.secondaryTextColor),
+                    toDo.type,
+                    style:
+                        const TextStyle(color: CustomColor.secondaryTextColor),
                   ),
                 ],
               ),

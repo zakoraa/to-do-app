@@ -10,22 +10,22 @@ abstract class ToDoEvent extends Equatable {
 
 class ToDoStarted extends ToDoEvent {}
 
-class AddTodo extends ToDoEvent {
-  final ToDo todo;
+class AddToDo extends ToDoEvent {
+  final ToDo toDo;
 
-  const AddTodo(this.todo);
+  const AddToDo(this.toDo);
 
   @override
-  List<Object> get props => [todo];
+  List<Object> get props => [toDo];
 }
 
-class RemoveTodo extends ToDoEvent {
-  final ToDo todo;
+class RemoveToDo extends ToDoEvent {
+  final ToDo toDo;
 
-  const RemoveTodo(this.todo);
+  const RemoveToDo(this.toDo);
 
   @override
-  List<Object> get props => [todo];
+  List<Object> get props => [toDo];
 }
 
 class AlterToDo extends ToDoEvent {

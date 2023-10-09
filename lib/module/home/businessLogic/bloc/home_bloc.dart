@@ -10,9 +10,9 @@ part 'home_state.dart';
 class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
   ToDoBloc() : super(const ToDoState()) {
     on<ToDoStarted>(_onStarted);
-    on<AddTodo>(_onAddToDo);
-    on<RemoveTodo>(_onRemoveToDo);
-    on<AlterToDo>((event, emit) {});
+    on<AddToDo>(_onAddToDo);
+    on<RemoveToDo>(_onRemoveToDo);
+    on<AlterToDo>(_onAlterToDo);
   }
 
   void _onStarted(
@@ -20,32 +20,32 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     Emitter<ToDoState> emit,
   ) {
     if (state.status == ToDoStatus.success) return;
-    emit(state.copyWith(todoList: state.todoList, status: ToDoStatus.success));
+    emit(state.copyWith(toDoList: state.toDoList, status: ToDoStatus.success));
   }
 
   void _onAddToDo(
-    AddTodo event,
+    AddToDo event,
     Emitter<ToDoState> emit,
   ) {
     emit(state.copyWith(status: ToDoStatus.loading));
     try {
       List<ToDo> temp = [];
-      temp.addAll(state.todoList);
-      temp.insert(0, event.todo);
+      temp.addAll(state.toDoList);
+      temp.insert(0, event.toDo);
     } catch (e) {
       emit(state.copyWith(status: ToDoStatus.error));
     }
   }
 
   void _onRemoveToDo(
-    RemoveTodo event,
+    RemoveToDo event,
     Emitter<ToDoState> emit,
   ) {
     emit(state.copyWith(status: ToDoStatus.loading));
     try {
       List<ToDo> temp = [];
-      temp.addAll(state.todoList);
-      temp.insert(0, event.todo);
+      temp.addAll(state.toDoList);
+      temp.insert(0, event.toDo);
     } catch (e) {
       emit(state.copyWith(status: ToDoStatus.error));
     }
@@ -57,9 +57,9 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
   ) {
     emit(state.copyWith(status: ToDoStatus.loading));
     try {
-      state.todoList[event.index].isDone == !state.todoList[event.index].isDone;
+      state.toDoList[event.index].isDone == !state.toDoList[event.index].isDone;
       emit(
-          state.copyWith(todoList: state.todoList, status: ToDoStatus.success));
+          state.copyWith(toDoList: state.toDoList, status: ToDoStatus.success));
     } catch (e) {
       emit(state.copyWith(status: ToDoStatus.error));
     }
@@ -71,7 +71,7 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
   }
 
   @override
-  Map<String, dynamic> toJson(ToDoState state) {
+  Map<String, dynamic>? toJson(ToDoState state) {
     throw UnimplementedError();
   }
 }
