@@ -157,7 +157,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                                 ToDo(
                                     title: titleController.text,
                                     createdTime: selectedDate!,
-                                    type: state.selectedType),
+                                    type: state.selectedType.toString()),
                                 context);
                             titleController.clear();
                             Navigator.pop(context);

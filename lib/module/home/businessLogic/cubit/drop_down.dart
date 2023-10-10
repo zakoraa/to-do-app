@@ -9,7 +9,7 @@ class DropDownState {
 class DropDownCubit extends Cubit<DropDownState> {
   DropDownCubit() : super(DropDownState(selectedType: "📒 Tugas"));
 
-  void selectType(var value) {
-    state.selectedType = value;
+  void selectType(String? value) {
+    emit(DropDownState(selectedType: value!));
   }
 }
