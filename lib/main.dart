@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todoapp/module/home/businessLogic/bloc/to_do_bloc.dart';
+import 'package:todoapp/module/home/businessLogic/cubit/date_picker.dart';
 import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
 import 'package:todoapp/module/home/view/home_view.dart';
 import 'package:todoapp/shared/themes/theme.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => DropDownCubit(),
-          )
+          ),
+          BlocProvider(create: (context) => DatePickerCubit()),
         ],
         child: BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, state) => MaterialApp(

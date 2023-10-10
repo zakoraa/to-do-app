@@ -82,7 +82,29 @@ class Incomplete extends StatelessWidget {
                     elevation: 0.0,
                     child: InkWell(
                       onTap: () {
-                        removeToDo(toDo, context);
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text(
+                                    "Are you sure you have completed this task?"),
+                                actions: [
+                                  TextButton(
+                                    child: const Text('Cancel'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text('Ok'),
+                                    onPressed: () {
+                                      removeToDo(toDo, context);
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
                       },
                       splashColor: Colors.transparent,
                       borderRadius: BorderRadius.circular(10),
@@ -99,14 +121,6 @@ class Incomplete extends StatelessWidget {
                     ),
                   ),
                 ),
-                // BlocProvider(
-                //   create: (context) => CheckCubit(),
-                //   child: BlocBuilder<CheckCubit, CheckState>(
-                //     builder: (context, state) {
-                //       return
-                //     },
-                //   ),
-                // ),
               ],
             ),
           ),

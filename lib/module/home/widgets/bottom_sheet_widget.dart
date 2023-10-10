@@ -7,20 +7,16 @@ import 'package:todoapp/model/to_do_model.dart';
 import 'package:todoapp/module/home/businessLogic/bloc/to_do_bloc.dart';
 import 'package:todoapp/module/home/businessLogic/cubit/drop_down.dart';
 import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
+import 'package:todoapp/module/home/widgets/choose_deadline.dart';
 import 'package:todoapp/module/home/widgets/drop_down_button.dart';
 import 'package:todoapp/shared/themes/color.dart';
 import '../../../shared/widgets/custom_text_field.dart';
 
-class BottomSheetWidget extends StatefulWidget {
+class BottomSheetWidget extends StatelessWidget {
   const BottomSheetWidget({super.key, this.isAddToDoList = true});
 
   final bool isAddToDoList;
 
-  @override
-  State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
-}
-
-class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
     TextEditingController titleController = TextEditingController();
@@ -83,7 +79,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                           width: MediaQuery.of(context).size.width - 140,
                           child: Center(
                               child: Text(
-                            widget.isAddToDoList
+                            isAddToDoList
                                 ? "Add Your To-Do List "
                                 : "Edit Your To-Do List ",
                             textAlign: TextAlign.center,
@@ -107,32 +103,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   const SizedBox(
                     height: 30.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: GestureDetector(
-                      onTap: () async {
-                        await _showDatePicker();
-                      },
-                      child: const Row(
-                        children: [
-                          Text(
-                            "Choose Deadline",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  const ChooseDeadline(),
                   const SizedBox(
                     height: 15.0,
                   ),
