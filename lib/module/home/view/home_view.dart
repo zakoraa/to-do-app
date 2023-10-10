@@ -42,8 +42,10 @@ class HomeView extends StatelessWidget {
                           children: List.generate(
                             state.toDoList.length,
                             (index) {
+                              final reversedIndex =
+                                  (state.toDoList.length - 1) - index;
                               return Incomplete(
-                                toDo: state.toDoList[index],
+                                toDo: state.toDoList[reversedIndex],
                               );
                             },
                           ),
