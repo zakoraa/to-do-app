@@ -30,9 +30,9 @@ class HomeView extends StatelessWidget {
                         const Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            "Incomplete",
+                            "My To Do List",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 13),
+                                fontWeight: FontWeight.bold, fontSize: 16),
                           ),
                         ),
                         const SizedBox(

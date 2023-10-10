@@ -24,7 +24,8 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
     TextEditingController titleController = TextEditingController();
-    String? selectedDate;
+    String selectedDate =
+        DateFormat('dd MMMM yyyy').format(DateTime.now().toLocal());
 
     Future<void> _showDatePicker() async {
       final newSelectedDate = await showDatePicker(
@@ -43,10 +44,6 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
 
     addToDo(ToDo toDo, BuildContext context) {
       context.read<ToDoBloc>().add(AddToDo(toDo));
-    }
-
-    removeToDo(ToDo toDo, BuildContext context) {
-      context.read<ToDoBloc>().add(RemoveToDo(toDo));
     }
 
     alterToDo(int index, BuildContext context) {
@@ -144,7 +141,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     height: 20.0,
                   ),
                   BlocBuilder<DropDownCubit, DropDownState>(
-                    builder:(context, state) =>  Padding(
+                    builder: (context, state) => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: OutlinedButton(
                           style: const ButtonStyle(
@@ -156,8 +153,8 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                             addToDo(
                                 ToDo(
                                     title: titleController.text,
-                                    createdTime: selectedDate!,
-                                    type: state.selectedType.toString()),
+                                    createdTime: selectedDate,
+                                    type: state.selectedType),
                                 context);
                             titleController.clear();
                             Navigator.pop(context);

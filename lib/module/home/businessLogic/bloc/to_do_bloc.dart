@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -32,9 +31,7 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
       List<ToDo> temp = [];
       temp.addAll(state.toDoList);
       temp.insert(0, event.toDo);
-      emit(state.copyWith(
-        toDoList: temp,
-        status: ToDoStatus.success));
+      emit(state.copyWith(toDoList: temp, status: ToDoStatus.success));
     } catch (e) {
       emit(state.copyWith(status: ToDoStatus.error));
     }
@@ -46,12 +43,9 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
   ) {
     emit(state.copyWith(status: ToDoStatus.loading));
     try {
-      List<ToDo> temp = [];
-      temp.addAll(state.toDoList);
-      temp.insert(0, event.toDo);
-      emit(state.copyWith(
-        toDoList: temp,
-        status: ToDoStatus.success));
+      state.toDoList.remove(event.toDo);
+      emit(
+          state.copyWith(toDoList: state.toDoList, status: ToDoStatus.success));
     } catch (e) {
       emit(state.copyWith(status: ToDoStatus.error));
     }

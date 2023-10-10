@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/module/home/businessLogic/bloc/to_do_bloc.dart';
 import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
 import 'package:todoapp/shared/themes/color.dart';
 import 'package:intl/intl.dart';
@@ -43,12 +44,24 @@ class HomeAppBar extends StatelessWidget {
                         const SizedBox(
                           height: 10.0,
                         ),
-                        const Text(
-                          "1 incomplete, 1 completed",
-                          style: TextStyle(
-                            color: CustomColor.secondaryTextColor,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        BlocBuilder<ToDoBloc, ToDoState>(
+                          builder: (context, state) => state.toDoList.isEmpty
+                              ? const Text(
+                                  "No assignments",
+                                  style: TextStyle(
+                                    color: CustomColor.secondaryTextColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : Text(
+                                  state.toDoList.length == 1
+                                      ? "${state.toDoList.length} task haven't been completed"
+                                      : "${state.toDoList.length} tasks haven't been completed",
+                                  style: const TextStyle(
+                                    color: CustomColor.secondaryTextColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
                         const SizedBox(
                           height: 15.0,
