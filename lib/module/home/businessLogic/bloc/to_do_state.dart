@@ -1,4 +1,4 @@
-part of 'home_bloc.dart';
+part of 'to_do_bloc.dart';
 
 enum ToDoStatus { initial, loading, success, error }
 
@@ -21,7 +21,7 @@ class ToDoState extends Equatable {
   @override
   factory ToDoState.fromJson(Map<String, dynamic> json) {
     try {
-      var listOfToDoList = (json['todo'] as List<dynamic>)
+      var listOfToDoList = (json["todo"] as List<dynamic>)
           .map((e) => ToDo.fromJson(e as Map<String, dynamic>))
           .toList();
 

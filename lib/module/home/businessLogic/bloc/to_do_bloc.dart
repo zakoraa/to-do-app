@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:todoapp/model/to_do_model.dart';
 
-part 'home_event.dart';
-part 'home_state.dart';
+part 'to_do_event.dart';
+part 'to_do_state.dart';
 
 class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
   ToDoBloc() : super(const ToDoState()) {
@@ -32,6 +32,9 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
       List<ToDo> temp = [];
       temp.addAll(state.toDoList);
       temp.insert(0, event.toDo);
+      emit(state.copyWith(
+        toDoList: temp,
+        status: ToDoStatus.success));
     } catch (e) {
       emit(state.copyWith(status: ToDoStatus.error));
     }
@@ -46,6 +49,9 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
       List<ToDo> temp = [];
       temp.addAll(state.toDoList);
       temp.insert(0, event.toDo);
+      emit(state.copyWith(
+        toDoList: temp,
+        status: ToDoStatus.success));
     } catch (e) {
       emit(state.copyWith(status: ToDoStatus.error));
     }
@@ -67,11 +73,11 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
 
   @override
   ToDoState? fromJson(Map<String, dynamic> json) {
-    throw UnimplementedError();
+    return ToDoState.fromJson(json);
   }
 
   @override
   Map<String, dynamic>? toJson(ToDoState state) {
-    throw UnimplementedError();
+    return state.toJson();
   }
 }

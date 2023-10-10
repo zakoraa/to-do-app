@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/model/to_do_model.dart';
-import 'package:todoapp/module/home/businessLogic/bloc/home_bloc.dart';
+import 'package:todoapp/module/home/businessLogic/bloc/to_do_bloc.dart';
 import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
 import 'package:todoapp/shared/themes/color.dart';
 import '../../../shared/widgets/custom_text_field.dart';
@@ -23,20 +23,31 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
     TextEditingController titleController = TextEditingController();
     List<String> listType = ["📒 Tugas", "💻 Programming", "Others"];
     String dropDownValue = listType.first;
+    DateTime? selectedDate;
 
-    Future _showDatePicker() async {
-      final selectedDate = await showDatePicker(
+    Future<void> _showDatePicker() async {
+      final newSelectedDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
         lastDate: DateTime(2025),
       );
 
-      if (selectedDate != null) {
-        return selectedDate.toLocal();
-      } else {
-        return;
+      if (newSelectedDate != null) {
+        selectedDate = newSelectedDate.toLocal();
       }
+    }
+
+    addToDo(ToDo toDo, BuildContext context) {
+      context.read<ToDoBloc>().add(AddToDo(toDo));
+    }
+
+    removeToDo(ToDo toDo, BuildContext context) {
+      context.read<ToDoBloc>().add(RemoveToDo(toDo));
+    }
+
+    alterToDo(int index, BuildContext context) {
+      context.read<ToDoBloc>().add(AlterToDo(index));
     }
 
     return SizedBox(
@@ -99,8 +110,8 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: GestureDetector(
-                      onTap: () {
-                        _showDatePicker();
+                      onTap: () async {
+                        await _showDatePicker();
                       },
                       child: const Row(
                         children: [
@@ -172,10 +183,13 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                           splashFactory: NoSplash.splashFactory,
                         ),
                         onPressed: () {
-                          AddToDo(ToDo(
-                              title: titleController.text,
-                              createdTime: _showDatePicker().toString(),
-                              type: dropDownValue));
+                          addToDo(
+                              ToDo(
+                                  title: titleController.text,
+                                  createdTime:
+                                      selectedDate!.toLocal().toString(),
+                                  type: dropDownValue),
+                              context);
                           titleController.clear();
                           Navigator.pop(context);
                         },

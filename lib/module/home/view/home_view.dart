@@ -1,26 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todoapp/module/home/businessLogic/bloc/home_bloc.dart';
+import 'package:todoapp/module/home/businessLogic/bloc/to_do_bloc.dart';
 import 'package:todoapp/module/home/widgets/app_bar_home.dart';
 import 'package:todoapp/module/home/widgets/incomplete.dart';
-
-import '../../../model/to_do_model.dart';
 import '../widgets/floating_button_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
-  addToDo(ToDo toDo, BuildContext context) {
-    context.read<ToDoBloc>().add(AddToDo(toDo));
-  }
-
-  removeToDo(ToDo toDo, BuildContext context) {
-    context.read<ToDoBloc>().add(RemoveToDo(toDo));
-  }
-
-  alterToDo(int index, BuildContext context) {
-    context.read<ToDoBloc>().add(AlterToDo(index));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +31,6 @@ class HomeView extends StatelessWidget {
                           children: List.generate(
                             state.toDoList.length,
                             (index) {
-                              state.toDoList[index].title;
                               return Incomplete(
                                 toDo: state.toDoList[index],
                               );
