@@ -7,6 +7,8 @@ import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
 import 'package:todoapp/module/home/view/home_view.dart';
 import 'package:todoapp/shared/themes/theme.dart';
 
+import 'module/home/businessLogic/cubit/drop_down.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => ToDoBloc()..add(ToDoStarted())),
           BlocProvider(
             create: (context) => ThemeCubit(),
+          ),
+          BlocProvider(
+            create: (context) => DropDownCubit(),
           )
         ],
         child: BlocBuilder<ThemeCubit, ThemeState>(

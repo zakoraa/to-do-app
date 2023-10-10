@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:todoapp/model/to_do_model.dart';
 import 'package:todoapp/module/home/businessLogic/bloc/to_do_bloc.dart';
+import 'package:todoapp/module/home/businessLogic/cubit/drop_down.dart';
 import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
+import 'package:todoapp/module/home/widgets/drop_down_button.dart';
 import 'package:todoapp/shared/themes/color.dart';
 import '../../../shared/widgets/custom_text_field.dart';
 
@@ -21,9 +24,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
     TextEditingController titleController = TextEditingController();
-    List<String> listType = ["📒 Tugas", "💻 Programming", "Others"];
-    String dropDownValue = listType.first;
-    DateTime? selectedDate;
+    String? selectedDate;
 
     Future<void> _showDatePicker() async {
       final newSelectedDate = await showDatePicker(
@@ -34,7 +35,9 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       );
 
       if (newSelectedDate != null) {
-        selectedDate = newSelectedDate.toLocal();
+        final formatedDate =
+            DateFormat('dd MMMM yyyy').format(newSelectedDate.toLocal());
+        selectedDate = formatedDate;
       }
     }
 
@@ -136,66 +139,33 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   const SizedBox(
                     height: 15.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Select Type : ",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
-                        DropdownButton(
-                          style: const TextStyle(fontSize: 14),
-                          borderRadius: BorderRadius.circular(10),
-                          value: dropDownValue,
-                          dropdownColor: const Color.fromARGB(255, 32, 32, 32),
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.white,
-                          ),
-                          items: listType
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                                value: value, child: Text(value));
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              dropDownValue = value!;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                  const DropDownButtonType(),
                   const SizedBox(
                     height: 20.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: OutlinedButton(
-                        style: const ButtonStyle(
-                          side: MaterialStatePropertyAll(BorderSide(
-                              color: CustomColor.secondaryTextColor)),
-                          splashFactory: NoSplash.splashFactory,
-                        ),
-                        onPressed: () {
-                          addToDo(
-                              ToDo(
-                                  title: titleController.text,
-                                  createdTime:
-                                      selectedDate!.toLocal().toString(),
-                                  type: dropDownValue),
-                              context);
-                          titleController.clear();
-                          Navigator.pop(context);
-                        },
-                        child: const Center(
-                          child: Text("Submit"),
-                        )),
+                  BlocBuilder<DropDownCubit, DropDownState>(
+                    builder:(context, state) =>  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: OutlinedButton(
+                          style: const ButtonStyle(
+                            side: MaterialStatePropertyAll(BorderSide(
+                                color: CustomColor.secondaryTextColor)),
+                            splashFactory: NoSplash.splashFactory,
+                          ),
+                          onPressed: () {
+                            addToDo(
+                                ToDo(
+                                    title: titleController.text,
+                                    createdTime: selectedDate!,
+                                    type: state.selectedType),
+                                context);
+                            titleController.clear();
+                            Navigator.pop(context);
+                          },
+                          child: const Center(
+                            child: Text("Submit"),
+                          )),
+                    ),
                   )
                 ],
               ),

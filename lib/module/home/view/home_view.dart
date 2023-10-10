@@ -27,6 +27,17 @@ class HomeView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: HomeAppBar.heightAppBar + 20),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 5),
+                          child: Text(
+                            "Incomplete",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 13),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
                         Column(
                           children: List.generate(
                             state.toDoList.length,
