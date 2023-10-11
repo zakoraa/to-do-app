@@ -70,23 +70,23 @@ class BottomSheetWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               GestureDetector(
                                 onTap: () {
                                   datePickerState.selectedDate = today;
                                   Navigator.pop(context);
                                 },
-                                child: const Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: Colors.white,
-                                  size: 40,
+                                child: const SizedBox(
+                                  width: 50,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: Colors.white,
+                                    size: 40,
+                                  ),
                                 ),
                               ),
-                              SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width - 140,
-                                  child: Center(
-                                      child: Text(
+                              Text(
                                     isAddToDoList
                                         ? "Add Your To-Do List "
                                         : "Edit Your To-Do List ",
@@ -95,7 +95,7 @@ class BottomSheetWidget extends StatelessWidget {
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
-                                  ))),
+                                  ),
                               const SizedBox(
                                 width: 50.0,
                               ),
