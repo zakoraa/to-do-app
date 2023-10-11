@@ -18,7 +18,8 @@ class HomeAppBar extends StatelessWidget {
     return Positioned(
       top: 0,
       left: 0,
-      child: SizedBox(
+      child: Container(
+        color: CustomColor.backgroundColor,
         height: heightAppBar,
         width: MediaQuery.of(context).size.width - 40,
         child: SafeArea(

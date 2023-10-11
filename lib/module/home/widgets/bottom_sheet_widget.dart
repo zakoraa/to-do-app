@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todoapp/model/to_do_model.dart';
 import 'package:todoapp/module/home/businessLogic/bloc/to_do_bloc.dart';
+import 'package:todoapp/module/home/businessLogic/cubit/date_picker.dart';
 import 'package:todoapp/module/home/businessLogic/cubit/drop_down.dart';
 import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
 import 'package:todoapp/module/home/widgets/choose_deadline.dart';
@@ -22,6 +23,7 @@ class BottomSheetWidget extends StatelessWidget {
     TextEditingController titleController = TextEditingController();
     String selectedDate =
         DateFormat('dd MMMM yyyy').format(DateTime.now().toLocal());
+    String today = selectedDate;
 
     Future<void> _showDatePicker() async {
       final newSelectedDate = await showDatePicker(
@@ -114,27 +116,30 @@ class BottomSheetWidget extends StatelessWidget {
                   BlocBuilder<DropDownCubit, DropDownState>(
                     builder: (context, state) => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: OutlinedButton(
-                          style: const ButtonStyle(
-                            side: MaterialStatePropertyAll(BorderSide(
-                                color: CustomColor.secondaryTextColor)),
-                            splashFactory: NoSplash.splashFactory,
-                          ),
-                          onPressed: () {
-                            addToDo(
-                                ToDo(
-                                    title: titleController.text,
-                                    createdTime: selectedDate,
-                                    type: state.selectedType),
-                                context);
-                            titleController.clear();
-                            Navigator.pop(context);
-                          },
-                          child: const Center(
-                            child: Text("Submit"),
-                          )),
+                      child: BlocBuilder<DatePickerCubit, DatePickerState>(
+                        builder: (context, datePickerState) => OutlinedButton(
+                            style: const ButtonStyle(
+                              side: MaterialStatePropertyAll(BorderSide(
+                                  color: CustomColor.secondaryTextColor)),
+                              splashFactory: NoSplash.splashFactory,
+                            ),
+                            onPressed: () {
+                              addToDo(
+                                  ToDo(
+                                      title: titleController.text,
+                                      createdTime: datePickerState.selectedDate,
+                                      type: state.selectedType),
+                                  context);
+                              titleController.clear();
+                              datePickerState.selectedDate = today;
+                              Navigator.pop(context);
+                            },
+                            child: const Center(
+                              child: Text("Submit"),
+                            )),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
