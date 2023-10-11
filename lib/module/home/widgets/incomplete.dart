@@ -114,7 +114,7 @@ class Incomplete extends StatelessWidget {
                         child: Center(
                           child: Text(
                             "Done",
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: 12, color: Colors.white),
                           ),
                         ),
                       ),

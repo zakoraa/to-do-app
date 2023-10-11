@@ -19,7 +19,7 @@ class HomeAppBar extends StatelessWidget {
       top: 0,
       left: 0,
       child: Container(
-        color: CustomColor.backgroundColor,
+        color: Theme.of(context).primaryColor,
         height: heightAppBar,
         width: MediaQuery.of(context).size.width - 40,
         child: SafeArea(
