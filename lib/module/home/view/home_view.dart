@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoapp/module/home/businessLogic/bloc/to_do_bloc.dart';
 import 'package:todoapp/module/home/widgets/app_bar_home.dart';
 import 'package:todoapp/module/home/widgets/incomplete.dart';
+import 'package:todoapp/shared/themes/color.dart';
 import '../widgets/floating_button_widget.dart';
 
 class HomeView extends StatelessWidget {
@@ -38,18 +39,31 @@ class HomeView extends StatelessWidget {
                         const SizedBox(
                           height: 10.0,
                         ),
-                        Column(
-                          children: List.generate(
-                            state.toDoList.length,
-                            (index) {
-                              final reversedIndex =
-                                  (state.toDoList.length - 1) - index;
-                              return Incomplete(
-                                toDo: state.toDoList[reversedIndex],
-                              );
-                            },
-                          ),
-                        )
+                        state.toDoList.isEmpty
+                            ? Container(
+                                margin: const EdgeInsets.only(top: 30),
+                                width: MediaQuery.of(context).size.width,
+                                child: const Center(
+                                  child: Text(
+                                    "Task is empty",
+                                    style: TextStyle(
+                                        color: CustomColor.secondaryTextColor),
+                                  ),
+                                ),
+                              )
+                            : Column(
+                                children: List.generate(
+                                  state.toDoList.length,
+                                  (index) {
+                                    final reversedIndex =
+                                        (state.toDoList.length - 1) - index;
+
+                                    return Incomplete(
+                                      toDo: state.toDoList[reversedIndex],
+                                    );
+                                  },
+                                ),
+                              )
                       ],
                     );
                   } else if (state.status == ToDoStatus.initial) {
