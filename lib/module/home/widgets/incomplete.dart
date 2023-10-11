@@ -87,7 +87,8 @@ class Incomplete extends StatelessWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 title: const Text(
-                                    "Are you sure you have completed this task?"),
+                                  "Are you sure you have completed this task?",
+                                ),
                                 actions: [
                                   TextButton(
                                     child: const Text('Cancel'),
