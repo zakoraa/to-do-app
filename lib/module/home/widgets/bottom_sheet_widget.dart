@@ -11,6 +11,7 @@ import 'package:todoapp/module/home/businessLogic/cubit/theme.dart';
 import 'package:todoapp/module/home/widgets/choose_deadline.dart';
 import 'package:todoapp/module/home/widgets/drop_down_button.dart';
 import 'package:todoapp/shared/themes/color.dart';
+import 'package:todoapp/shared/utils/scaffold_messenger.dart';
 import '../../../shared/widgets/custom_text_field.dart';
 
 class BottomSheetWidget extends StatelessWidget {
@@ -87,15 +88,15 @@ class BottomSheetWidget extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                    isAddToDoList
-                                        ? "Add Your To-Do List "
-                                        : "Edit Your To-Do List ",
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
+                                isAddToDoList
+                                    ? "Add Your To-Do List "
+                                    : "Edit Your To-Do List ",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
                               const SizedBox(
                                 width: 50.0,
                               ),
@@ -130,16 +131,25 @@ class BottomSheetWidget extends StatelessWidget {
                                     splashFactory: NoSplash.splashFactory,
                                   ),
                                   onPressed: () {
-                                    addToDo(
-                                        ToDo(
-                                            title: titleController.text,
-                                            createdTime:
-                                                datePickerState.selectedDate,
-                                            type: state.selectedType),
-                                        context);
-                                    titleController.clear();
-                                    datePickerState.selectedDate = today;
-                                    Navigator.pop(context);
+                                    if (titleController.text.isNotEmpty) {
+                                      addToDo(
+                                          ToDo(
+                                              title: titleController.text,
+                                              createdTime:
+                                                  datePickerState.selectedDate,
+                                              type: state.selectedType),
+                                          context);
+                                      titleController.clear();
+                                      datePickerState.selectedDate = today;
+                                      Navigator.pop(context);
+                                      ScaffoldMessengerUtils
+                                          .showSuccessedFloatingSnackBar(context,
+                                              "Successfully added Task");
+                                    } else {
+                                      ScaffoldMessengerUtils
+                                          .showFailedFloatingSnackBar(context,
+                                              "Please fill in the title!");
+                                    }
                                   },
                                   child: const Center(
                                     child: Text("Submit"),
